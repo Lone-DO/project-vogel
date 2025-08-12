@@ -2,8 +2,7 @@
   font-family: 'Lucida Handwritten';
   src: url('/fonts/LHANDW.TTF');
 }
-body {
-  & {
-    font-family: 'Lucida Handwritten';
-  }
+
+* {
+  box-sizing: border-box;
 }

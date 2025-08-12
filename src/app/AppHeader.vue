@@ -7,16 +7,14 @@
 
 <style lang="scss" scoped>
 #header {
-  gap: 0.5rem;
-  display: flex;
-  height: fit-content;
-  justify-content: center;
+  @include Flex('center');
+  @include SecondaryTheme;
 
   width: 100%;
-  color: #ddd;
-  padding: 0.5rem 1rem;
-  background-color: #e0371c;
+  height: fit-content;
   font-family: 'Lucida Handwritten';
+
+  padding: $padding;
 
   &__title {
     font-weight: 800;

@@ -1,0 +1,48 @@
+@use './colors.scss' as *;
+
+@mixin Padding($padding: 1rem) {
+  padding: 0;
+  @include Tablet {
+    padding: $padding;
+  }
+}
+
+@mixin SecondaryTheme {
+  color: $secondaryFontColor;
+  background-color: $secondaryColor;
+}
+
+@mixin Flex($flow: '') {
+  gap: 0.5rem;
+  display: flex;
+
+  @if ($flow == 'center') {
+    align-items: center;
+    justify-content: center;
+  }
+  @content;
+}
+
+@mixin Tablet {
+  @media (min-width: 480px) {
+    @content;
+  }
+}
+
+@mixin Laptop {
+  @media (min-width: 720px) {
+    @content;
+  }
+}
+
+@mixin Desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin Desktop-plus {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
