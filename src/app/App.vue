@@ -1,11 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AppFooter from './AppFooter.vue'
+import AppHeader from './AppHeader.vue'
+import AppNavigation from './AppNavigation.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <AppHeader />
+  <!-- <AppNavigation /> -->
+  <AppFooter />
 </template>
 
-<style scoped></style>
+<style lang="scss">
+@use '@/assets/styles/base.scss' as *;
+#app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+}
+</style>
