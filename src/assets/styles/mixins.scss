@@ -7,18 +7,28 @@
   }
 }
 
+@mixin BoxShadow($shadow) {
+  -webkit-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
 @mixin SecondaryTheme {
   color: $secondaryFontColor;
   background-color: $secondaryColor;
 }
 
-@mixin Flex($flow: '') {
+@mixin Flex($direction: unset, $justify: center, $align: unset) {
   gap: 0.5rem;
   display: flex;
 
-  @if ($flow == 'center') {
-    align-items: center;
-    justify-content: center;
+  @if ($direction != 'unset') {
+    flex-direction: $direction;
+  }
+  @if ($justify != 'unset') {
+    justify-content: $justify;
+  }
+  @if ($align != 'unset') {
+    align-items: $align;
   }
   @content;
 }

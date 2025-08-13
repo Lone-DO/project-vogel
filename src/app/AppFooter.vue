@@ -11,10 +11,7 @@
 <style lang="scss" scoped>
 footer {
   @include SecondaryTheme;
-  @include Flex('center') {
-    flex-direction: column;
-  }
-
+  @include Flex($direction: column, $align: center);
   width: 100%;
   margin-top: auto;
   padding: $padding 1rem;

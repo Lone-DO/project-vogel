@@ -11,16 +11,12 @@
 
 <style lang="scss" scoped>
 #header {
-  @include Flex('center') {
-    justify-content: space-between;
-  }
   @include SecondaryTheme;
-
+  @include Flex($justify: space-between, $align: center);
   width: 100%;
   height: 50px;
   position: relative;
   font-family: 'Lucida Handwritten';
-  // padding: $padding;
 
   img {
     width: 2rem;
