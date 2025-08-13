@@ -1,20 +1,33 @@
 <template lang="html">
   <header id="header">
-    <span id="header__title" title="Birds in the Wild">Vögel</span>
-    <i id="header__subtitle"> in unseren Wäldern</i>
+    <img id="header__tree-icon" src="/images/tree.svg" alt="tree icon" />
+    <p>
+      <span id="header__title" title="Birds in the Wild">Vögel</span>
+      <i id="header__subtitle"> in unseren Wäldern</i>
+    </p>
+    <img id="header__house-icon" src="/images/building.svg" alt="building icon" />
   </header>
 </template>
 
 <style lang="scss" scoped>
 #header {
-  @include Flex('center');
+  @include Flex('center') {
+    justify-content: space-between;
+  }
   @include SecondaryTheme;
 
   width: 100%;
-  height: fit-content;
+  height: 50px;
+  position: relative;
   font-family: 'Lucida Handwritten';
+  // padding: $padding;
 
-  padding: $padding;
+  img {
+    width: 2rem;
+  }
+  &__house-icon {
+    margin-right: 1rem;
+  }
 
   &__title {
     font-weight: 800;
