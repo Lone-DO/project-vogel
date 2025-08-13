@@ -8,7 +8,7 @@ import AppNavigation from './AppNavigation.vue'
   <AppHeader />
   <main>
     <AppNavigation />
-    <AppContent />
+    <RouterView />
   </main>
   <AppFooter />
 </template>
@@ -21,7 +21,7 @@ import AppNavigation from './AppNavigation.vue'
   }
 
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   position: relative;
   font-family: monospace;
@@ -34,9 +34,11 @@ import AppNavigation from './AppNavigation.vue'
       justify-content: flex-start;
     }
 
+    overflow: auto;
     flex: 100%;
     width: 100%;
     align-items: flex-start;
+    max-height: calc(100vh - ($headerHeight + $footerHeight));
   }
 }
 </style>

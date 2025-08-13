@@ -14,8 +14,9 @@ import { vogels } from '@/assets/data/vogel'
 </script>
 <style lang="scss" scoped>
 nav {
+  top: -1px;
+  position: sticky;
   width: 100%;
-  position: relative;
   padding: $paddingSmall;
   background-color: $green;
   @include Laptop {
@@ -29,9 +30,11 @@ ul {
   border-radius: 4px;
 
   border: 1px solid rgba($color: black, $alpha: 0.5);
-  $shadow:
-    inset -2px 2px 5px 1px #000000,
-    inset 2px -2px 5px 1px #000000;
+  $shadow: inset 0px 0px 4px 1px
+    rgba(
+      $color: black,
+      $alpha: 0.5,
+    );
   @include BoxShadow($shadow);
   @include Laptop {
     flex-wrap: wrap;
