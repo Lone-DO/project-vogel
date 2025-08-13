@@ -6,15 +6,18 @@ import AppNavigation from './AppNavigation.vue'
 
 <template>
   <AppHeader />
-  <!-- <AppNavigation /> -->
+  <main>
+    <AppNavigation />
+    <AppContent />
+  </main>
   <AppFooter />
 </template>
 
 <style lang="scss">
 @use '@/assets/styles/base.scss' as *;
 #app {
-  @include Flex('center') {
-    flex-direction: column;
+  @include Flex($direction: column, $justify: center, $align: center) {
+    gap: 0;
   }
 
   width: 100vw;
@@ -23,5 +26,17 @@ import AppNavigation from './AppNavigation.vue'
   position: relative;
   font-family: monospace;
   background-color: whitesmoke;
+
+  main {
+    @include Flex($direction: column, $justify: flex-start);
+    @include Laptop {
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+    }
+
+    flex: 100%;
+    width: 100%;
+    align-items: flex-start;
+  }
 }
 </style>
