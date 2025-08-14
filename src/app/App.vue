@@ -28,16 +28,17 @@ import AppNavigation from './AppNavigation.vue'
   background-color: whitesmoke;
 
   main {
-    @include Flex($direction: column, $justify: flex-start);
-    @include Laptop {
+    @include Flex($direction: column, $justify: flex-start, $align: flex-start);
+    column-gap: 0;
+    @include Desktop {
       flex-direction: row-reverse;
       justify-content: flex-start;
+      align-items: center;
     }
 
-    overflow: auto;
     flex: 100%;
     width: 100%;
-    align-items: flex-start;
+    overflow: hidden;
     max-height: calc(100vh - ($headerHeight + $footerHeight));
   }
 }

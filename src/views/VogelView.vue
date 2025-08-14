@@ -1,13 +1,13 @@
 <template lang="html">
   <article v-if="vogel">
     <aside>
-      <h3>{{ vogel.name }}</h3>
-      <span>Grosse: {{ vogel.size }}</span>
-      <span>Gewicht: {{ vogel.weight }}</span>
+      <h2>{{ vogel.name }}</h2>
+      <i><b>Grosse:</b> {{ vogel.size }}</i>
+      <i><b>Gewicht:</b> {{ vogel.weight }}</i>
     </aside>
     <section>
       <fieldset v-for="(info, index) in vogel.data" :key="index">
-        <strong>{{ info.title }}</strong>
+        <h3>{{ info.title }}</h3>
         <p>{{ info.description }}</p>
       </fieldset>
     </section>
@@ -34,6 +34,50 @@ if (!vogel.value) {
 </script>
 <style lang="scss" scoped>
 article {
+  width: 100%;
+  overflow: auto;
+  padding: 0 0.5rem 0.5rem;
+  @include Flex($direction: column);
+  @include Laptop {
+    flex: 1;
+    flex-direction: row;
+  }
+}
+
+aside,
+section {
+  width: 100%;
   padding: $padding;
+  border-radius: 2px;
+  border: 1px solid black;
+  @include Laptop {
+    overflow: auto;
+  }
+}
+
+aside {
+  @include Flex($direction: column);
+  flex: 40%;
+}
+
+section {
+  @include Flex($justify: flex-start, $align: flex-start) {
+    flex: 60%;
+    flex-wrap: wrap;
+    align-content: space-between;
+  }
+  background-color: $pageGreen;
+
+  fieldset {
+    @include Laptop {
+      min-width: 200px;
+      max-width: 250px;
+      flex: 1;
+    }
+  }
+}
+
+strong {
+  text-transform: uppercase;
 }
 </style>

@@ -17,7 +17,7 @@
   background-color: $secondaryColor;
 }
 
-@mixin Flex($direction: unset, $justify: center, $align: unset) {
+@mixin Flex($direction: unset, $justify: unset, $align: unset) {
   gap: 0.5rem;
   display: flex;
 
