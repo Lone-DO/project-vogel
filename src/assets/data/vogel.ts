@@ -1,6 +1,6 @@
 import type { iVogel } from '@/models'
 
-export const vogels: iVogel[] = [
+export const vogelData: iVogel[] = [
   {
     id: 1,
     name: 'Der GartenBaumläufer',
@@ -9,7 +9,7 @@ export const vogels: iVogel[] = [
     sound: '',
     data: [
       {
-        title: 'Aussehen und gesang',
+        title: 'Aussehen und Gesang',
         description:
           'Die Unterseite des Gartenbaum-läufers ist weißlich, die Oberseite dagegen braun-weiß gemustert -wie die Rinde der Bäume. So ist der kleine Waldvogel mit dem langen gebogenen Schnabel perfekt getarnt. Er singt eine hohe, kurze melodische Strophe: „Di-dideli-di-di."',
       },
@@ -29,12 +29,12 @@ export const vogels: iVogel[] = [
         title: '',
         description: '',
         image: 'nest',
-        image_description: 'Das Nest eines Gartenbaumlaufers',
+        image_description: 'Das Nest eines Gartenbaumläufers',
       },
       {
         title: 'Nest und nachwuchs',
         description:
-          'Das Nest des Gartenbaumläufers ist hinter abstehenden Rindenstücken, in Spalten von Baumstämmen und in Höhlen oder Ritzen von Holzstapeln gut versteckt. Dort legt das Weib-chen meist fünf bis sechs Eier ab.',
+          'Das Nest des Gartenbaumläufers ist hinter abstehenden Rindenstücken, in Spalten von Baumstämmen und in Höhlen oder Ritzen von Holzstapeln gut versteckt. Dort legt das Weibchen meist fünf bis sechs Eier ab.',
       },
       {
         title: 'Wenn es winter wird',
@@ -59,7 +59,7 @@ export const vogels: iVogel[] = [
       {
         title: 'LIEBLINGSSPEISE',
         description:
-          'Neben Insekten und Larven, die der Vogel mit seinem Schnabel aus mor-schem Holz holt, frisst er auch Nüsse und Samen aus Zapfen.',
+          'Neben Insekten und Larven, die der Vogel mit seinem Schnabel aus morschem Holz holt, frisst er auch Nüsse und Samen aus Zapfen.',
       },
       {
         title: 'ERSTAUNLICH!',
@@ -70,8 +70,8 @@ export const vogels: iVogel[] = [
       {
         title: 'NEST UND NACHWUCHS',
         description:
-          'Der Buntspecht hämmert eine Höhle in einen morschen oder sowieso wei-chen Baumstamm. Das Weibchen legt vier bis sieben weiße Eier hinein.',
-        icon: 'catepillar',
+          'Der Buntspecht hämmert eine Höhle in einen morschen oder sowieso weichen Baumstamm. Das Weibchen legt vier bis sieben weiße Eier hinein.',
+        icon: 'caterpillar',
       },
       {
         title: 'WENN ES WINTER WIRD',

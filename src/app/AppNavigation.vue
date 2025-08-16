@@ -1,7 +1,7 @@
 <template lang="html">
   <nav>
     <ul>
-      <li v-for="vogel in vogels" :key="vogel.id">
+      <li v-for="vogel in vogelData" :key="vogel.id">
         <router-link :to="`/page/${vogel.id}`">
           <img :src="`/images/icons/${vogel.id}.svg`" alt="" />
         </router-link>
@@ -10,7 +10,7 @@
   </nav>
 </template>
 <script lang="ts" setup>
-import { vogels } from '@/assets/data/vogel'
+import { vogelData } from '@/assets/data/vogel'
 </script>
 <style lang="scss" scoped>
 nav {

@@ -14,7 +14,7 @@
   </article>
 </template>
 <script lang="ts" setup>
-import { vogels } from '@/assets/data/vogel'
+import { vogelData } from '@/assets/data/vogel'
 import type { iVogel } from '@/models'
 import { computed, type ComputedRef } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -23,7 +23,7 @@ const $route = useRoute()
 const $router = useRouter()
 const vogelId = computed(() => $route.params.id)
 const vogel: ComputedRef<iVogel> | undefined = computed(() => {
-  const item = vogels[Number(vogelId.value) - 1]
+  const item = vogelData[Number(vogelId.value) - 1]
   return item
 })
 
