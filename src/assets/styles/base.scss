@@ -11,3 +11,8 @@ h2,
 h3 {
   font-weight: 800;
 }
+
+img {
+  width: fit-content;
+  max-width: -webkit-fill-available;
+}

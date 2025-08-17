@@ -1,9 +1,12 @@
 <template lang="html">
   <article v-if="vogel">
     <aside>
-      <h2>{{ vogel.name }}</h2>
-      <i><b>Grosse:</b> {{ vogel.size }}</i>
-      <i><b>Gewicht:</b> {{ vogel.weight }}</i>
+      <img :src="`/images/${vogel.id}/page-links.webp`" alt="" />
+      <div v-show="false">
+        <h2>{{ vogel.name }}</h2>
+        <i><b>Größe:</b> {{ vogel.size }}</i>
+        <i><b>Gewicht:</b> {{ vogel.weight }}</i>
+      </div>
     </aside>
     <section>
       <fieldset v-for="(info, index) in vogel.data" :key="index">
@@ -58,7 +61,6 @@ article {
 aside,
 section {
   width: 100%;
-  padding: $padding;
   border-radius: 2px;
   border: 1px solid black;
   @include Laptop {
@@ -77,9 +79,11 @@ section {
     flex-wrap: wrap;
     align-content: space-between;
   }
+  padding: $gapSmall $gap;
   background-color: $pageGreen;
 
   fieldset {
+    padding: 0;
     @include Laptop {
       min-width: 200px;
       max-width: 250px;

@@ -14,7 +14,7 @@ footer {
   @include Flex($direction: column, $align: center);
   width: 100%;
   margin-top: auto;
-  padding: $padding 1rem;
+  padding: $gapSmall $gap $gap;
   @include Laptop {
     width: unset;
     border-radius: 12px 12px 0 0;
