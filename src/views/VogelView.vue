@@ -16,21 +16,32 @@
 <script lang="ts" setup>
 import { vogelData } from '@/assets/data/vogel'
 import type { iVogel } from '@/models'
-import { computed, type ComputedRef } from 'vue'
+import { computed, onMounted, watch, type ComputedRef } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const $route = useRoute()
 const $router = useRouter()
 const vogelId = computed(() => $route.params.id)
 const vogel: ComputedRef<iVogel> | undefined = computed(() => {
+  /** TODO: Create Vogel Store, and Mock fetch VogelData from Promise, with an `action` for getting Vogel by id */
   const item = vogelData[Number(vogelId.value) - 1]
   return item
 })
 
-if (!vogel.value) {
-  console.info('Vogel 404')
-  $router.push('/')
+const hasData = computed(() => Boolean(vogel.value.data.length))
+
+function init() {
+  if (!vogel?.value) {
+    console.info('Vogel 404')
+    $router.push('/')
+  } else if (!hasData.value) {
+    console.info('Vogel Disabled')
+    $router.push('/')
+  }
 }
+
+onMounted(init)
+watch(vogel, init)
 </script>
 <style lang="scss" scoped>
 article {

@@ -1,9 +1,14 @@
 <template lang="html">
   <nav>
     <ul>
-      <li v-for="vogel in vogelData" :key="vogel.id">
+      <li
+        v-for="vogel in vogelData"
+        :key="vogel.id"
+        :disabled="!vogel.data.length || null"
+        :title="!vogel.data.length ? 'Disabled: Please checkout book for full experience' : ''"
+      >
         <router-link :to="`/page/${vogel.id}`">
-          <img :src="`/images/icons/${vogel.id}.svg`" alt="" />
+          <img :src="`/images/${vogel.id}/profile.webp`" :alt="vogel.name + 'profile icon'" />
         </router-link>
       </li>
     </ul>
@@ -41,6 +46,17 @@ ul {
     justify-content: space-between;
   }
 }
+
+li[disabled] {
+  cursor: not-allowed;
+  a {
+    pointer-events: none;
+  }
+  img {
+    filter: grayscale(1);
+  }
+}
+
 img {
   width: 3rem;
   border-radius: 100%;

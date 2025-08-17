@@ -1,11 +1,11 @@
 <template lang="html">
   <header id="header">
-    <img id="header__tree-icon" src="/images/tree.svg" alt="tree icon" />
+    <img id="header__tree-icon" src="/images/raw/tree.svg" alt="tree icon" />
     <p>
       <span id="header__title" title="Birds in the Wild">Vögel</span>
       <i id="header__subtitle"> in unseren Wäldern</i>
     </p>
-    <img id="header__house-icon" src="/images/building.svg" alt="building icon" />
+    <img id="header__house-icon" src="/images/raw/building.svg" alt="building icon" />
   </header>
 </template>
 
