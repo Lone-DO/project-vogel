@@ -1,11 +1,14 @@
 <template lang="html">
   <header id="header">
     <img id="header__tree-icon" src="/images/raw/tree.svg" alt="tree icon" />
-    <RouterLink to="/">
+    <p>
       <span id="header__title" title="Birds in the Wild">Vögel</span>
       <i id="header__subtitle"> in unseren Wäldern</i>
+      <!-- TODO: Update Header based on selected series -->
+    </p>
+    <RouterLink to="/" title="navigate to home page">
+      <img id="header__house-icon" src="/images/raw/building.svg" alt="building icon" />
     </RouterLink>
-    <img id="header__house-icon" src="/images/raw/building.svg" alt="building icon" />
   </header>
 </template>
 
@@ -15,6 +18,7 @@
   @include Flex($justify: space-between, $align: center);
   width: 100%;
   height: 50px;
+  margin-bottom: auto;
   position: relative;
   font-family: 'Lucida Handwritten';
 
