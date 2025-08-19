@@ -1,15 +1,27 @@
 {
   "name": "project-vogel",
-  "version": "0.0.0",
+  "description": "Web Book - Application, based on the kinderbücher series 'Vögel' in Germany",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
+  "homepage": "https://lone-do.github.io/project-vogel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lone-DO/project-vogel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lone-DO/project-vogel/issues"
+  },
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },
+  "author": "lone-do",
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
+    "dev": "vite --port 3003 --strictPort",
+    "build": "run-p type-check \"build-only {@}\"",
+    "build:plugin": "vite build --mode plugin",
+    "build:dev": "vite build --mode development --watch",
+    "preview": "vite preview --port 3003 --strictPort --mode development",
     "test:unit": "vitest",
     "test:e2e": "playwright test",
     "build-only": "vite build",
