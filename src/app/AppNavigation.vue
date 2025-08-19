@@ -1,16 +1,19 @@
 <script lang="ts" setup>
 import { vogelData } from '@/assets/data/vogel'
-import { computed } from 'vue'
+import { computed, type PropType } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const vogelId = computed(() => Number(route.params.id) || null)
+const props = defineProps({
+  mode: { default: 'page', type: String as PropType<'page' | 'book'> },
+})
 
 const isActive = (id: number) => id === vogelId.value || null
 </script>
 
 <template lang="html">
-  <nav>
+  <nav :data-mode="props.mode">
     <ul>
       <li data-type="controller">
         <img src="/images/speaker.webp" alt="speaker image" />
@@ -36,24 +39,52 @@ const isActive = (id: number) => id === vogelId.value || null
 </template>
 
 <style lang="scss" scoped>
+@mixin ResponsiveNav {
+  $width: calc(($iconSize + $gapSmall) * 2.5);
+  max-width: $width;
+  min-width: $width;
+  ul {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    li[data-type='controller'] {
+      flex: 100%;
+    }
+  }
+}
 nav {
   top: -1px;
   z-index: 2;
   width: 100%;
   overflow: auto;
   position: sticky;
-
   padding: $gapSmall;
   background-color: $green;
+
   min-height: $navigationHeight;
+
   @include Flex($align: center);
-  @include Desktop {
-    flex-basis: calc(($iconSize + $gapSmall) * 3);
-    ul {
+  &[data-mode='book'] {
+    li[data-type='controller'] {
+      display: none;
+    }
+    @include Tablet {
+      @include ResponsiveNav;
       flex-wrap: wrap;
-      justify-content: space-between;
       li[data-type='controller'] {
-        flex: 100%;
+        display: flex;
+      }
+    }
+  }
+  &[data-mode='page'] {
+    @include Desktop {
+      @include ResponsiveNav;
+    }
+    li[data-type='controller'] {
+      &:first-child {
+        margin-right: auto;
+      }
+      &:last-child {
+        margin-left: auto;
       }
     }
   }
@@ -63,15 +94,16 @@ ul {
   @include Flex($justify: center);
   width: 100%;
   min-height: 70px;
+  padding: $gapSmall;
   border-radius: 4px;
   min-width: fit-content;
-  padding: $gapSmall;
   border: 1px solid rgba($color: black, $alpha: 0.5);
 
   @include BoxShadow(inset 0px 0px 4px 1px rgba($color: black, $alpha: 0.5));
 }
 
 li {
+  @include Flex($justify: center);
   &[disabled] {
     cursor: not-allowed;
     a {
@@ -83,16 +115,6 @@ li {
   }
   &[data-type='option']:not([disabled]) :hover {
     transform: scale(1.1);
-  }
-  &[data-type='controller'] {
-    z-index: 1;
-    @include Flex($justify: center);
-    &:first-child {
-      margin-right: auto;
-    }
-    &:last-child {
-      margin-left: auto;
-    }
   }
 }
 

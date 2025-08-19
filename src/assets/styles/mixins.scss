@@ -1,9 +1,26 @@
 @use './colors.scss' as *;
+@use './variables.scss' as *;
 
 @mixin Padding($padding: 1rem) {
   padding: 0;
   @include Tablet {
     padding: $padding;
+  }
+}
+
+@mixin MaxHeight($height: unset) {
+  height: 100%;
+  @if ($height != 'unset') {
+    @media (min-height: calc($height + $heightOffset)) {
+      max-height: $height;
+    }
+  }
+}
+
+@mixin MaxWidth($width: unset) {
+  width: fit-content;
+  @if ($width != 'unset') {
+    max-width: $width;
   }
 }
 
@@ -17,10 +34,12 @@
   background-color: $secondaryColor;
 }
 
-@mixin Flex($direction: unset, $justify: unset, $align: unset) {
-  gap: 0.5rem;
+@mixin Flex($direction: unset, $justify: unset, $align: unset, $gap: 0.5rem) {
   display: flex;
 
+  @if ($gap != 'unset') {
+    gap: $gap;
+  }
   @if ($direction != 'unset') {
     flex-direction: $direction;
   }

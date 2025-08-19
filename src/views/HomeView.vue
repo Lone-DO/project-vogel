@@ -1,20 +1,30 @@
+<script lang="ts" setup>
+import AppNavigation from '@/app/AppNavigation.vue'
+</script>
+
 <template lang="html">
   <section>
-    <img src="/images/front.webp" alt="" />
+    <img src="/images/front.webp" alt="Front cover of book" />
+    <AppNavigation mode="book" />
   </section>
 </template>
-<script lang="ts" setup></script>
+
 <style lang="scss" scoped>
-$maxHeight: calc(100vh - ($headerHeight + $footerHeight + $navigationHeight + $gapSmall));
 section {
+  @include Flex($justify: center, $gap: unset);
   width: 100%;
-  @include Flex($justify: center, $align: center);
+  overflow: auto;
+  flex-direction: column-reverse;
+  @include Tablet {
+    flex-direction: row;
+  }
 }
 
-section,
 img {
-  & {
-    max-height: $maxHeight;
+  max-height: $maxContentHeight;
+  @include MaxHeight(550px);
+  @include Tablet {
+    @include MaxWidth(calc(100vw - $navigationWidth));
   }
 }
 </style>

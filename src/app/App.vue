@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import AppFooter from './AppFooter.vue'
 import AppHeader from './AppHeader.vue'
-import AppNavigation from './AppNavigation.vue'
 </script>
 
 <template>
   <AppHeader />
   <main>
-    <AppNavigation />
     <RouterView />
   </main>
   <AppFooter />
@@ -16,9 +14,7 @@ import AppNavigation from './AppNavigation.vue'
 <style lang="scss">
 @use '@/assets/styles/base.scss' as *;
 #app {
-  @include Flex($direction: column, $justify: center, $align: center) {
-    gap: 0;
-  }
+  @include Flex($direction: column, $justify: center, $align: center, $gap: unset);
 
   width: 100vw;
   min-height: 100vh;
@@ -28,18 +24,16 @@ import AppNavigation from './AppNavigation.vue'
   background-color: whitesmoke;
 
   main {
-    @include Flex($direction: column, $justify: flex-start, $align: flex-start);
-    column-gap: 0;
-    @include Desktop {
-      flex-direction: row-reverse;
-      justify-content: flex-start;
-      align-items: center;
-    }
-
+    @include Flex($direction: column, $justify: flex-start, $align: flex-start, $gap: unset);
     flex: 100%;
     width: 100%;
     overflow: hidden;
-    max-height: calc(100vh - ($headerHeight + $footerHeight));
+    justify-content: center;
+    max-height: $maxContentHeight;
+
+    @include Desktop {
+      padding: $gapSmall;
+    }
   }
 }
 </style>
