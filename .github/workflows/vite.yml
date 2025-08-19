@@ -42,7 +42,7 @@ jobs:
       - name: Build
         uses: borales/actions-yarn@v4
         with:
-          cmd: release # will run `yarn build:prod` command
+          cmd: build # will run `yarn build:prod` command
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
