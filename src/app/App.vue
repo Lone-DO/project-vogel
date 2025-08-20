@@ -16,8 +16,8 @@ import AppHeader from './AppHeader.vue'
 #app {
   @include Flex($direction: column, $justify: center, $align: center, $gap: unset);
 
-  width: 100vw;
-  min-height: 100vh;
+  width: 100svw;
+  min-height: 100svh;
   overflow: hidden;
   position: relative;
   font-family: monospace;
@@ -25,15 +25,10 @@ import AppHeader from './AppHeader.vue'
 
   main {
     @include Flex($direction: column, $justify: flex-start, $align: flex-start, $gap: unset);
-    flex: 100%;
     width: 100%;
     overflow: hidden;
     justify-content: center;
     max-height: $maxContentHeight;
-
-    @include Desktop {
-      padding: $gapSmall;
-    }
   }
 }
 </style>

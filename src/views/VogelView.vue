@@ -40,6 +40,7 @@ watch(vogel, init)
     <article>
       <aside>
         <suspense>
+          <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/figcaption -->
           <img :src="imgSrc" alt="vogel left page image" />
           <template #fallback>Loading...</template>
         </suspense>
@@ -64,7 +65,7 @@ watch(vogel, init)
   width: 100%;
   overflow: auto;
   /** Responsive height for auto filling */
-  @include MaxHeight(calc(100vh - ($heightOffset)));
+  @include MaxHeight(calc(100svh - ($heightOffset)));
   @include Desktop {
     display: flex;
     flex-direction: row-reverse;
@@ -91,12 +92,16 @@ article {
 
   aside {
     @include Flex($direction: column);
-    flex: 50%;
+    flex: 40%;
+    img {
+      max-width: 780px;
+      max-height: 980px;
+    }
   }
 
   section {
     @include Flex($justify: flex-start, $align: flex-start) {
-      flex: 50%;
+      flex: 60%;
       flex-wrap: wrap;
       align-content: space-between;
     }

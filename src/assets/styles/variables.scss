@@ -4,6 +4,6 @@ $iconSize: 48px;
 $headerHeight: 50px;
 $footerHeight: 58px;
 $heightOffset: calc($headerHeight + $footerHeight);
-$maxContentHeight: calc(100vh - $heightOffset);
+$maxContentHeight: calc(100svh - $heightOffset);
 $navigationHeight: 100px;
 $navigationWidth: 140px;
