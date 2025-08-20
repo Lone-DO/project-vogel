@@ -25,6 +25,7 @@ onMounted(async () => {
 
 <template lang="html">
   <nav :data-mode="props.mode">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/menu -->
     <ul>
       <li data-type="controller">
         <img src="@/assets/images/speaker.webp" alt="speaker image" />

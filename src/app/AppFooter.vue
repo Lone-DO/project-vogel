@@ -1,5 +1,6 @@
 <template lang="html">
   <footer>
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/small -->
     <i>© 2024 COPPENRATH Verlag GmbH & Co. KG</i>
     <p>
       <span>Based on the following </span>
