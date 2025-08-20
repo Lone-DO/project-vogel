@@ -2,7 +2,7 @@
 import AppNavigation from '@/app/AppNavigation.vue'
 import { vogelData } from '@/assets/data/vogel'
 import type { iVogel } from '@/models'
-import { computed, onMounted, watch, type ComputedRef } from 'vue'
+import { computed, onMounted, ref, watch, type ComputedRef } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const $route = useRoute()
@@ -14,16 +14,20 @@ const vogel: ComputedRef<iVogel> | undefined = computed(() => {
   return item
 })
 
+const imgSrc = ref('')
 const hasData = computed(() => Boolean(vogel.value.data.length))
-
-function init() {
+async function init() {
   if (!vogel?.value) {
     console.info('Vogel 404')
-    $router.push('/')
-  } else if (!hasData.value) {
-    console.info('Vogel Disabled')
-    $router.push('/')
+    return $router.push('/')
   }
+  if (!hasData.value) {
+    console.info('Vogel Disabled')
+    return $router.push('/')
+  }
+  const file = await import(`@/assets/images/${vogel.value.id}/page-links.webp`)
+  imgSrc.value = file.default
+  return
 }
 
 onMounted(init)
@@ -35,7 +39,10 @@ watch(vogel, init)
     <AppNavigation />
     <article>
       <aside>
-        <img :src="`/images/${vogel.id}/page-links.webp`" alt="" />
+        <suspense>
+          <img :src="imgSrc" alt="vogel left page image" />
+          <template #fallback>Loading...</template>
+        </suspense>
         <div v-show="false">
           <h2>{{ vogel.name }}</h2>
           <i><b>Größe:</b> {{ vogel.size }}</i>

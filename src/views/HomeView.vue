@@ -4,7 +4,7 @@ import AppNavigation from '@/app/AppNavigation.vue'
 
 <template lang="html">
   <section>
-    <img src="/images/front.webp" alt="Front cover of book" />
+    <img src="@/assets/images/front.webp" alt="Front cover of book" />
     <AppNavigation mode="book" />
   </section>
 </template>

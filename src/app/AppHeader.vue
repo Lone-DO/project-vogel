@@ -1,13 +1,13 @@
 <template lang="html">
   <header id="header">
-    <img id="header__tree-icon" src="/images/raw/tree.svg" alt="tree icon" />
+    <img id="header__tree-icon" src="@/assets/images/raw/tree.svg" alt="tree icon" />
     <p>
       <span id="header__title" title="Birds in the Wild">Vögel</span>
       <i id="header__subtitle"> in unseren Wäldern</i>
       <!-- TODO: Update Header based on selected series -->
     </p>
     <RouterLink to="/" title="navigate to home page">
-      <img id="header__house-icon" src="/images/raw/building.svg" alt="building icon" />
+      <img id="header__house-icon" src="@/assets/images/raw/building.svg" alt="building icon" />
     </RouterLink>
   </header>
 </template>

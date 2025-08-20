@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { vogelData } from '@/assets/data/vogel'
-import { computed, type PropType } from 'vue'
+import type { iVogel, iVogelParsed } from '@/models'
+import { computed, onMounted, ref, type PropType } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -10,16 +11,26 @@ const props = defineProps({
 })
 
 const isActive = (id: number) => id === vogelId.value || null
+
+const parsedVogel = ref<iVogelParsed[]>([])
+onMounted(async () => {
+  parsedVogel.value = await Promise.all(
+    vogelData.map(async (vogel: iVogel) => {
+      const file = await import(`@/assets/images/${vogel.id}/profile.webp`)
+      return { ...vogel, imgSrc: file.default }
+    }),
+  )
+})
 </script>
 
 <template lang="html">
   <nav :data-mode="props.mode">
     <ul>
       <li data-type="controller">
-        <img src="/images/speaker.webp" alt="speaker image" />
+        <img src="@/assets/images/speaker.webp" alt="speaker image" />
       </li>
       <li
-        v-for="vogel in vogelData"
+        v-for="vogel in parsedVogel"
         :key="vogel.id"
         data-type="option"
         :data-active="isActive(vogel.id)"
@@ -27,12 +38,12 @@ const isActive = (id: number) => id === vogelId.value || null
         :title="!vogel.data.length ? 'Disabled: Please checkout book for full experience' : ''"
       >
         <router-link :to="`/page/${vogel.id}`">
-          <img :src="`/images/${vogel.id}/profile.webp`" :alt="vogel.name + 'profile icon'" />
+          <img :src="vogel.imgSrc" :alt="vogel.name + 'profile icon'" />
         </router-link>
       </li>
       <li data-type="controller">
         <!-- TODO: Create Toggle to enable sound onClick events -->
-        <img src="/images/speaker.webp" alt="speaker image" />
+        <img src="@/assets/images/speaker.webp" alt="speaker image" />
       </li>
     </ul>
   </nav>
@@ -124,11 +135,6 @@ img {
   border-radius: 100%;
   border: 1px solid rgba($color: $green, $alpha: 0.5);
 
-  @include BoxShadow(
-    (
-      inset 0 0px 1px 1px rgba($color: $green, $alpha: 0.75),
-      0 0px 2px 1px rgba($color: black, $alpha: 0.5)
-    )
-  );
+  @include BoxShadow((inset 0 0px 1px 1px rgba($color: $green, $alpha: 0.75), 0 0px 2px 1px rgba($color: black, $alpha: 0.5)));
 }
 </style>

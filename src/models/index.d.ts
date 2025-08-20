@@ -15,3 +15,7 @@ export interface iVogel {
   weight: string
   data: iVogelArticle[]
 }
+
+interface iVogelParsed extends iVogel {
+  imgSrc: string
+}
