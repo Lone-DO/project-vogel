@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import AppNavigation from '@/app/AppNavigation.vue'
 import { vogelData } from '@/assets/data/vogel'
+import VogelField from '@/components/VogelField.vue'
 import type { iVogel } from '@/models'
-import { computed, onMounted, reactive, ref, watch, type ComputedRef } from 'vue'
+import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch, type ComputedRef } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const $route = useRoute()
@@ -14,9 +15,8 @@ const vogel: ComputedRef<iVogel> | undefined = computed(() => {
   return item
 })
 
-const altImgSrc = ref('')
 const primaryImgSrc = ref('')
-const icons = reactive<{ [key: string]: string }>({})
+
 const hasData = computed(() => Boolean(vogel.value.data.length))
 const dataLeft = computed(() => vogel.value?.data?.slice(0, 3))
 const dataRight = computed(() => vogel.value?.data?.slice(3))
@@ -32,20 +32,24 @@ async function init() {
   }
   const file = await import(`@/assets/images/${vogel.value.id}/page-links.webp`)
   primaryImgSrc.value = file.default
-  const altFile = await import(`@/assets/images/${vogel.value.id}/page-alt.webp`)
-  altImgSrc.value = altFile.default
-
-  vogel.value.data.forEach(async (field) => {
-    if (field.icon) {
-      const file = await import(`@/assets/images/${vogel.value.id}/${field.icon}.webp`)
-      icons[field.icon] = file.default
-    }
-  })
-  return
+  return syncWidth()
 }
 
-onMounted(init)
+const leftContainer = useTemplateRef('left')
+const rightContainer = useTemplateRef('right')
+const maxWidthLeft = ref('100px')
+const maxWidthRight = ref('100px')
+async function syncWidth() {
+  maxWidthLeft.value = `${leftContainer.value?.clientWidth || 100}px`
+  maxWidthRight.value = `${rightContainer.value?.clientWidth || 100}px`
+}
+
+onMounted(() => {
+  init()
+  addEventListener('resize', syncWidth)
+})
 watch(vogel, init)
+onUnmounted(() => removeEventListener('resize', syncWidth))
 </script>
 
 <template lang="html">
@@ -65,31 +69,15 @@ watch(vogel, init)
         </div>
       </aside>
       <section id='vogel-view__right'>
-        <div id='vogel-view__column-left'>
-          <fieldset v-for="(info, index) in dataLeft" :key="index">
-            <template v-if='info.image'>
-              <img :src="altImgSrc" :alt="info.image" data-type='alt'>
-              <p data-type='image-description'>{{ info.image_description }}</p>
-            </template>
-            <template v-else>
-              <h3>{{ info.title }}</h3>
-              <p>{{ info.description }}</p>
-              <img v-if='info.icon' :src="icons[info.icon]" :alt="info.icon" data-type='icon'>
-            </template>
-          </fieldset>
-        </div>
-        <div id='vogel-view__column-right'>
-          <fieldset v-for="(info, index) in dataRight" :key="index">
-            <template v-if='info.image'>
-              <img :src="altImgSrc" :alt="info.image" data-type='alt'>
-              <p data-type='image-description'>{{ info.image_description }}</p>
-            </template>
-            <template v-else>
-              <h3>{{ info.title }}</h3>
-              <p>{{ info.description }}</p>
-              <img v-if='info.icon' :src="icons[info.icon]" :alt="info.icon" data-type='icon'>
-            </template>
-          </fieldset>
+        <div>
+          <div id='vogel-view__column-left' ref='left'>
+            <VogelField v-for="(info, index) in dataLeft" :key="index" :info :vogel
+              :styles='{ maxImgSize: maxWidthLeft }' />
+          </div>
+          <div id='vogel-view__column-right' ref='right'>
+            <VogelField v-for="(info, index) in dataRight" :key="index" :info :vogel
+              :styles='{ maxImgSize: maxWidthRight }' />
+          </div>
         </div>
       </section>
     </article>
@@ -117,8 +105,9 @@ article {
 
     #vogel-view__left,
     #vogel-view__right {
-      border: 1px solid black;
       overflow: auto;
+      position: relative;
+      border: 1px solid black;
     }
 
     #vogel-view__left {
@@ -128,7 +117,7 @@ article {
     #vogel-view__column-left,
     #vogel-view__column-right {
       flex: 1;
-      min-width: 190px;
+      min-width: 180px;
     }
   }
 
@@ -143,7 +132,7 @@ article {
 
 
     @include Desktop {
-      max-height: 550px;
+      max-height: 600px;
     }
   }
 
@@ -169,18 +158,31 @@ article {
   }
 
   #vogel-view__right {
-    @include Flex($justify: flex-start, $align: flex-start) {
-      flex: 60%;
-      flex-wrap: wrap;
-      align-content: space-between;
+
+    &,
+    &>div {
+      padding: $gap;
+
+      @include Desktop {
+        max-width: calc(500px + 2rem);
+      }
     }
 
-    padding: $gapSmall $gap;
-    background-color: var(--theme);
 
-    @include Desktop {
-      gap: 1rem;
-      max-width: 450px;
+    &>div {
+      width: 100%;
+      padding: 2rem $gap;
+      background-color: var(--theme);
+
+      @include Flex($justify: flex-start, $align: flex-start) {
+        flex: 60%;
+        flex-wrap: wrap;
+        align-content: space-between;
+      }
+
+      @include Desktop {
+        gap: $gap;
+      }
     }
   }
 
@@ -192,45 +194,6 @@ article {
       gap: $gapSmall;
     }
 
-  }
-
-  fieldset {
-    @include Flex($gap: unset);
-    padding: 0;
-    flex-wrap: wrap;
-
-    @include Laptop {
-      flex-direction: column;
-
-      img[data-type="icon"] {
-        margin-right: $gap;
-      }
-    }
-
-    h3 {
-      flex: 100%;
-      font-size: 1rem;
-      color: var(--theme-color);
-      text-transform: uppercase;
-    }
-
-    img {
-      &[data-type="icon"] {
-        flex: 1;
-        margin-left: auto;
-        max-width: 50px;
-      }
-    }
-
-    p {
-      flex: 80%;
-    }
-
-    p[data-type="image-description"] {
-      font-size: 0.75rem;
-      color: var(--theme-color);
-      white-space: nowrap;
-    }
   }
 
   strong {
