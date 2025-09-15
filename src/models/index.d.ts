@@ -10,6 +10,8 @@ export interface iVogel {
   id: number
   name: string
   position: string
+  theme: string
+  themeColor: string
   sound: string
   size: string
   weight: string
