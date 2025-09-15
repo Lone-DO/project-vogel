@@ -2,7 +2,7 @@
 import AppNavigation from '@/app/AppNavigation.vue'
 import { vogelData } from '@/assets/data/vogel'
 import type { iVogel } from '@/models'
-import { computed, onMounted, ref, watch, type ComputedRef } from 'vue'
+import { computed, onMounted, reactive, ref, watch, type ComputedRef } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const $route = useRoute()
@@ -14,8 +14,13 @@ const vogel: ComputedRef<iVogel> | undefined = computed(() => {
   return item
 })
 
-const imgSrc = ref('')
+const altImgSrc = ref('')
+const primaryImgSrc = ref('')
+const icons = reactive<{ [key: string]: string }>({})
 const hasData = computed(() => Boolean(vogel.value.data.length))
+const dataLeft = computed(() => vogel.value?.data?.slice(0, 3))
+const dataRight = computed(() => vogel.value?.data?.slice(3))
+const injectedStyles = computed(() => ({ '--theme-color': vogel.value.themeColor, '--theme': vogel.value.theme }))
 async function init() {
   if (!vogel?.value) {
     console.info('Vogel 404')
@@ -26,7 +31,16 @@ async function init() {
     return $router.push('/')
   }
   const file = await import(`@/assets/images/${vogel.value.id}/page-links.webp`)
-  imgSrc.value = file.default
+  primaryImgSrc.value = file.default
+  const altFile = await import(`@/assets/images/${vogel.value.id}/page-alt.webp`)
+  altImgSrc.value = altFile.default
+
+  vogel.value.data.forEach(async (field) => {
+    if (field.icon) {
+      const file = await import(`@/assets/images/${vogel.value.id}/${field.icon}.webp`)
+      icons[field.icon] = file.default
+    }
+  })
   return
 }
 
@@ -35,13 +49,13 @@ watch(vogel, init)
 </script>
 
 <template lang="html">
-  <section v-if="vogel" id="vogel-view">
+  <section v-if="vogel" id="vogel-view" :style='injectedStyles'>
     <AppNavigation />
     <article>
-      <aside>
+      <aside id='vogel-view__left'>
         <suspense>
           <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/figcaption -->
-          <img :src="imgSrc" alt="vogel left page image" />
+          <img :src="primaryImgSrc" alt="vogel left page image" />
           <template #fallback>Loading...</template>
         </suspense>
         <div v-show="false">
@@ -50,11 +64,33 @@ watch(vogel, init)
           <i><b>Gewicht:</b> {{ vogel.weight }}</i>
         </div>
       </aside>
-      <section>
-        <fieldset v-for="(info, index) in vogel.data" :key="index">
-          <h3>{{ info.title }}</h3>
-          <p>{{ info.description }}</p>
-        </fieldset>
+      <section id='vogel-view__right'>
+        <div id='vogel-view__column-left'>
+          <fieldset v-for="(info, index) in dataLeft" :key="index">
+            <template v-if='info.image'>
+              <img :src="altImgSrc" :alt="info.image" data-type='alt'>
+              <p data-type='image-description'>{{ info.image_description }}</p>
+            </template>
+            <template v-else>
+              <h3>{{ info.title }}</h3>
+              <p>{{ info.description }}</p>
+              <img v-if='info.icon' :src="icons[info.icon]" :alt="info.icon" data-type='icon'>
+            </template>
+          </fieldset>
+        </div>
+        <div id='vogel-view__column-right'>
+          <fieldset v-for="(info, index) in dataRight" :key="index">
+            <template v-if='info.image'>
+              <img :src="altImgSrc" :alt="info.image" data-type='alt'>
+              <p data-type='image-description'>{{ info.image_description }}</p>
+            </template>
+            <template v-else>
+              <h3>{{ info.title }}</h3>
+              <p>{{ info.description }}</p>
+              <img v-if='info.icon' :src="icons[info.icon]" :alt="info.icon" data-type='icon'>
+            </template>
+          </fieldset>
+        </div>
       </section>
     </article>
   </section>
@@ -77,35 +113,54 @@ article {
   overflow: auto;
 
   @include Laptop {
-
     flex-direction: row;
+
+    #vogel-view__left,
+    #vogel-view__right {
+      border: 1px solid black;
+      overflow: auto;
+    }
+
+    #vogel-view__left {
+      padding: $gap;
+    }
+
+    #vogel-view__column-left,
+    #vogel-view__column-right {
+      flex: 1;
+      min-width: 190px;
+    }
   }
 
-  @include LaptopMax {
+  @include LaptopOnly {
     flex: 1;
   }
 
-  aside,
-  section {
+  #vogel-view__left,
+  #vogel-view__right {
     width: 100%;
     border-radius: 2px;
 
-    @include Laptop {
-      overflow: auto;
-    }
 
     @include Desktop {
       max-height: 550px;
     }
   }
 
-  aside {
-    @include Flex($direction: column);
+  #vogel-view__left {
+    @include Flex($direction: column, $justify: center, $align: center);
+
+    background-color: #FFF;
     flex: 40%;
 
     img {
+      height: unset;
       max-width: 780px;
       max-height: 980px;
+    }
+
+    @include Tablet {
+      border-right: 0;
     }
 
     @include Desktop {
@@ -113,29 +168,68 @@ article {
     }
   }
 
-  section {
+  #vogel-view__right {
     @include Flex($justify: flex-start, $align: flex-start) {
       flex: 60%;
       flex-wrap: wrap;
       align-content: space-between;
     }
 
-    border: 1px solid black;
     padding: $gapSmall $gap;
-    background-color: $pageGreen;
+    background-color: var(--theme);
 
     @include Desktop {
+      gap: 1rem;
       max-width: 450px;
     }
+  }
 
-    fieldset {
-      padding: 0;
+  #vogel-view__column-left,
+  #vogel-view__column-right {
+    @include Flex($direction: column, $justify: flex-start, $align: flex-start);
 
-      @include Laptop {
-        min-width: 200px;
-        max-width: 250px;
-        flex: 1;
+    @include TabletOnly {
+      gap: $gapSmall;
+    }
+
+  }
+
+  fieldset {
+    @include Flex($gap: unset);
+    padding: 0;
+    flex-wrap: wrap;
+
+    @include Laptop {
+      flex-direction: column;
+
+      img[data-type="icon"] {
+        margin-right: $gap;
       }
+    }
+
+    h3 {
+      flex: 100%;
+      font-size: 1rem;
+      color: var(--theme-color);
+      text-transform: uppercase;
+    }
+
+    img {
+      &[data-type="icon"] {
+        flex: 1;
+        margin-left: auto;
+        max-width: 50px;
+      }
+    }
+
+    p {
+      flex: 80%;
+    }
+
+    p[data-type="image-description"] {
+      font-size: 0.75rem;
+      color: var(--theme-color);
+      white-space: nowrap;
     }
   }
 
