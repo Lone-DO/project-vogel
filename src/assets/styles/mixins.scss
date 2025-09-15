@@ -63,6 +63,11 @@
     @content;
   }
 }
+@mixin LaptopMax {
+  @media (max-width: 1023px) {
+    @content;
+  }
+}
 
 @mixin Desktop {
   @media (min-width: 1024px) {

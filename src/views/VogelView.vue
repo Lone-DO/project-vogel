@@ -66,20 +66,25 @@ watch(vogel, init)
   overflow: auto;
   /** Responsive height for auto filling */
   @include MaxHeight(calc(100svh - ($heightOffset)));
+
   @include Desktop {
-    display: flex;
-    flex-direction: row-reverse;
+    @include Flex($direction: row-reverse, $justify: center, $gap: unset);
   }
 }
 
 article {
-  @include Flex($direction: column, $gap: unset);
-  width: 100%;
+  @include Flex($direction: column, $justify: center, $gap: unset);
   overflow: auto;
+
   @include Laptop {
-    flex: 1;
+
     flex-direction: row;
   }
+
+  @include LaptopMax {
+    flex: 1;
+  }
+
   aside,
   section {
     width: 100%;
@@ -88,14 +93,23 @@ article {
     @include Laptop {
       overflow: auto;
     }
+
+    @include Desktop {
+      max-height: 550px;
+    }
   }
 
   aside {
     @include Flex($direction: column);
     flex: 40%;
+
     img {
       max-width: 780px;
       max-height: 980px;
+    }
+
+    @include Desktop {
+      max-width: 416px;
     }
   }
 
@@ -105,12 +119,18 @@ article {
       flex-wrap: wrap;
       align-content: space-between;
     }
+
     border: 1px solid black;
     padding: $gapSmall $gap;
     background-color: $pageGreen;
 
+    @include Desktop {
+      max-width: 450px;
+    }
+
     fieldset {
       padding: 0;
+
       @include Laptop {
         min-width: 200px;
         max-width: 250px;
