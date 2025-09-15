@@ -11,6 +11,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": [
+    "abstehenden",
     "COPPENRATH",
     "Gewicht",
     "Große",
@@ -22,5 +23,6 @@
     "Vögel",
     "vogels",
     "Wäldern"
-  ]
+  ],
+  "cSpell.language": "en,de-DE"
 }
