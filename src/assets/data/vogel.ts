@@ -6,7 +6,7 @@ export const vogelData: iVogel[] = [
     name: 'Der GartenBaumläufer',
     size: '12-14 cm',
     weight: '11 g',
-    sound: '',
+
     data: [
       {
         title: 'Aussehen und Gesang',
@@ -14,18 +14,32 @@ export const vogelData: iVogel[] = [
       },
       {
         title: 'Lieblingsspeise',
-        description: 'Der Gartenbaumläufer sucht in den Ritzen der Rinde nach kleinen In-sekten. Darum sind ihm Bäume mit rauer Borke am liebsten.',
-        icon: 'flutterling',
+        description: 'Der Gartenbaumläufer sucht in den Ritzen der Rinde nach kleinen In-sekten. Darum sind ihm Bäume mit rauer Broke am liebsten.',
+        icon: 'schmetterling',
+        image_extension: 'webp',
+        styles: {
+          size: '50px',
+          marginOffset: '2rem'
+        }
       },
       {
         title: 'Erstaunlich!',
         description: 'Wie eine Maus läuft der Gartenbaum-läufer spiralförmig die Baumstämme hinauf. Oben angekommen, fliegt er direkt wieder nach unten - an den Stammfuß des nächsten Baums. Beim Klettern stützt er sich mit seinem langen Schwanz ab.',
         icon: 'beetle',
+        image_extension: 'webp',
+        styles: {
+          size: '50px',
+          marginOffset: '2rem',
+        }
       },
       {
         title: '',
         description: '',
-        image: 'nest',
+        image: 'enable',
+        styles: {
+          size: '50px',
+        },
+        image_extension: 'webp',
         image_description: 'Das Nest eines Gartenbaumläufers',
       },
       {
@@ -46,7 +60,6 @@ export const vogelData: iVogel[] = [
     name: 'Der Buntspecht',
     size: '23-26 cm',
     weight: '60-100 g',
-    sound: '',
     data: [
       {
         title: 'AUSSEHEN UND GESANG',
@@ -59,12 +72,28 @@ export const vogelData: iVogel[] = [
       {
         title: 'ERSTAUNLICH!',
         description: 'Spechte haben oft eine eigene Schmiede, eine Spechtschmiede. Das sind Rindenspalten oder Astgabeln. Dort klemmen die Tiere Nüsse oder Zapfen ein, um sie dann mit dem Schnabel aufzuhacken.',
-        icon: 'tree',
+        styles: {
+          size: '100px',
+          marginOffset: '2rem',
+          positionNested: true,
+          position: 'absolute',
+          left: '30%',
+          top: '100%'
+        },
+        icon: 'pinecone',
+        image_extension: 'webp',
       },
       {
         title: 'NEST UND NACHWUCHS',
         description: 'Der Buntspecht hämmert eine Höhle in einen morschen oder sowieso weichen Baumstamm. Das Weibchen legt vier bis sieben weiße Eier hinein.',
+        styles: {
+          size: '100px',
+          position: 'absolute',
+          top: '0',
+          right: '0'
+        },
         icon: 'caterpillar',
+        image_extension: 'webp',
       },
       {
         title: 'WENN ES WINTER WIRD',
@@ -73,7 +102,10 @@ export const vogelData: iVogel[] = [
       {
         title: '',
         description: '',
-        image: '',
+        image: 'enable',
+        styles: {
+          sizeOffset: '2rem',
+        },
         image_description: 'Ein junger Buntspecht schaut aus seiner Baumhöhle.',
       },
     ],
@@ -85,7 +117,7 @@ export const vogelData: iVogel[] = [
     id: 3,
     name: '',
     position: '',
-    sound: '',
+
     size: '',
     weight: '',
     data: [],
@@ -96,7 +128,6 @@ export const vogelData: iVogel[] = [
     id: 4,
     name: '',
     position: '',
-    sound: '',
     size: '',
     weight: '',
     data: [],
@@ -108,7 +139,6 @@ export const vogelData: iVogel[] = [
     name: 'Der Gimpel',
     size: '15-19 cm',
     weight: '26 g',
-    sound: '',
     data: [
       {
         title: 'AUSSEHEN UND GESANG',
@@ -139,7 +169,7 @@ export const vogelData: iVogel[] = [
     id: 6,
     name: '',
     position: '',
-    sound: '',
+
     size: '',
     weight: '',
     data: [],
@@ -150,7 +180,7 @@ export const vogelData: iVogel[] = [
     id: 7,
     name: '',
     position: '',
-    sound: '',
+
     size: '',
     weight: '',
     data: [],
@@ -161,7 +191,7 @@ export const vogelData: iVogel[] = [
     id: 8,
     name: '',
     position: '',
-    sound: '',
+
     size: '',
     weight: '',
     data: [],
@@ -172,7 +202,7 @@ export const vogelData: iVogel[] = [
     id: 9,
     name: '',
     position: '',
-    sound: '',
+
     size: '',
     weight: '',
     data: [],
@@ -183,7 +213,7 @@ export const vogelData: iVogel[] = [
     id: 10,
     name: '',
     position: '',
-    sound: '',
+
     size: '',
     weight: '',
     data: [],
@@ -194,7 +224,7 @@ export const vogelData: iVogel[] = [
     id: 11,
     name: '',
     position: '',
-    sound: '',
+
     size: '',
     weight: '',
     data: [],
@@ -205,7 +235,7 @@ export const vogelData: iVogel[] = [
     id: 12,
     name: '',
     position: '',
-    sound: '',
+
     size: '',
     weight: '',
     data: [],
