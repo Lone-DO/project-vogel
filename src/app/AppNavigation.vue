@@ -30,14 +30,9 @@ onMounted(async () => {
       <li data-type="controller">
         <img src="@/assets/images/speaker.webp" alt="speaker image" />
       </li>
-      <li
-        v-for="vogel in parsedVogel"
-        :key="vogel.id"
-        data-type="option"
-        :data-active="isActive(vogel.id)"
+      <li v-for="vogel in parsedVogel" :key="vogel.id" data-type="option" :data-active="isActive(vogel.id)"
         :disabled="!vogel.data.length || null"
-        :title="!vogel.data.length ? 'Disabled: Please checkout book for full experience' : ''"
-      >
+        :title="!vogel.data.length ? 'Disabled: Please checkout book for full experience' : ''">
         <router-link :to="`/page/${vogel.id}`">
           <img :src="vogel.imgSrc" :alt="vogel.name + 'profile icon'" />
         </router-link>
@@ -52,17 +47,20 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 @mixin ResponsiveNav {
-  $width: calc(($iconSize + $gapSmall) * 2.5);
+  $width: calc(($iconSize + $gapSmall) * 2.6);
   max-width: $width;
   min-width: $width;
+
   ul {
     flex-wrap: wrap;
     justify-content: space-between;
+
     li[data-type='controller'] {
       flex: 100%;
     }
   }
 }
+
 nav {
   top: -1px;
   z-index: 2;
@@ -75,26 +73,32 @@ nav {
   min-height: $navigationHeight;
 
   @include Flex($align: center);
+
   &[data-mode='book'] {
     li[data-type='controller'] {
       display: none;
     }
+
     @include Tablet {
       @include ResponsiveNav;
       flex-wrap: wrap;
+
       li[data-type='controller'] {
         display: flex;
       }
     }
   }
+
   &[data-mode='page'] {
     @include Desktop {
       @include ResponsiveNav;
     }
+
     li[data-type='controller'] {
       &:first-child {
         margin-right: auto;
       }
+
       &:last-child {
         margin-left: auto;
       }
@@ -116,15 +120,19 @@ ul {
 
 li {
   @include Flex($justify: center);
+
   &[disabled] {
     cursor: not-allowed;
+
     a {
       pointer-events: none;
     }
+
     img {
       filter: grayscale(1);
     }
   }
+
   &[data-type='option']:not([disabled]) :hover {
     transform: scale(1.1);
   }
