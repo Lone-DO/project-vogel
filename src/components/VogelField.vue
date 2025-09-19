@@ -95,10 +95,7 @@ watch(() => $props.vogel, init)
     margin-left: auto;
     margin-right: var(--margin-offset);
     min-width: var(--icon-size);
-
-    @include Tablet {
-      max-width: var(--icon-size);
-    }
+    max-width: var(--icon-size);
 
     @include Laptop {
       position: var(--icon-position);
