@@ -3,6 +3,7 @@ import { effect, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 const regex = /(audio\/)(\d+)(.wav)/gm
 export const usePlayerStore = defineStore('playerStore', () => {
+  /** TODO: 🐛 Audio Assets Loading multiple times */
   const context = import.meta.glob('@/assets/audio/*.wav', { eager: true, import: 'default' })
   /** Loop over Audio Assets and cache them as Key/Value pairs for easy importing/referencing */
   const data = Object.keys(context).reduce((set, filePath) => {
@@ -30,7 +31,6 @@ export const usePlayerStore = defineStore('playerStore', () => {
     }
   }
   async function play(skip?: boolean) {
-    console.log('play')
     if (!ready.value) return;
     if (currentSound.value && enabled.value && element.value) {
       /** Play Audio Player Element */
