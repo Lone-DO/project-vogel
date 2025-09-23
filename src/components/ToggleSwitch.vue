@@ -46,6 +46,7 @@ function update(event: unknown) {
     width: 100%;
     padding: 2px;
     min-height: 2rem;
+    max-height: 2rem;
     border-radius: 1rem;
     background-color: $green;
     @include BoxShadow(inset 0px 0px 4px 0px rgba($color: black, $alpha: 0.75));
@@ -55,8 +56,8 @@ function update(event: unknown) {
     width: 12px;
     height: 12px;
     border-radius: 100%;
+    transition: all 100ms ease-in-out;
     @include BoxShadow(inset 0px 0px 4px 0px rgba($color: black, $alpha: 0.75));
-    transition: all 100ms ease-in-out
   }
 
   &[data-checked] &__icon {

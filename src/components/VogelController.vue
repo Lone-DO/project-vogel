@@ -30,20 +30,20 @@ const playerStore = usePlayerStore()
   }
 
   &__description {
-    display: none;
     @include BoxShadow(inset 0px 0px 2px 1px rgba($color: black, $alpha: 0.5));
+    display: none;
+    padding: 4px;
+    border-radius: 4px;
 
     @include Desktop {
-      padding: 4px;
       display: block;
-      border-radius: 4px;
+    }
 
-      p {
-        display: flex;
-        text-align: center;
-        align-items: center;
-        flex-direction: column;
-      }
+    p {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      flex-direction: column;
     }
   }
 }

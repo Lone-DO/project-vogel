@@ -11,7 +11,6 @@ export const usePlayerStore = defineStore('playerStore', () => {
     /** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll */
     const [regexMatch] = [...filePath.matchAll(regex)]
     const fileName = regexMatch[2]
-    console.log('data:loop', { [fileName]: filePath })
     return { ...set, [fileName]: filePath }
   }, {})
   const sounds = ref(data)

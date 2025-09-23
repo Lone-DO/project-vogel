@@ -15,14 +15,24 @@ section {
   width: 100%;
   overflow: auto;
   flex-direction: column-reverse;
+
   @include Tablet {
     flex-direction: row;
+
+    &:deep #vogel-controller {
+      font-size: 0.5rem;
+    }
+
+    &:deep #vogel-controller__description {
+      display: block;
+    }
   }
 }
 
 img {
   max-height: $maxContentHeight;
   @include MaxHeight(550px);
+
   @include Tablet {
     @include MaxWidth(calc(100vw - $navigationWidth));
   }
