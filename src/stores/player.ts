@@ -7,16 +7,16 @@ export const usePlayerStore = defineStore('playerStore', () => {
   const context = import.meta.glob('@/assets/audio/*.wav', { eager: true, import: 'default' })
   /** Loop over Audio Assets and cache them as Key/Value pairs for easy importing/referencing */
   const data = Object.keys(context).reduce((set, filePath) => {
-    // const module = context[filePath]
+    const module = context[filePath]
     /** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll */
     const [regexMatch] = [...filePath.matchAll(regex)]
     const fileName = regexMatch[2]
-    return { ...set, [fileName]: filePath }
+    return { ...set, [fileName]: module }
   }, {})
   const sounds = ref(data)
   /** Book Power State, when truthy, audio will play, else muted */
   const cacheEnabled = localStorage.getItem('powerOn')
-  const enabled = ref(cacheEnabled === 'true' ? true : false)
+  const enabled = ref(cacheEnabled === 'false' ? false : true)
   /** Audio Source */
   const ready = ref(false)
   const element = ref<HTMLAudioElement | null>(null)
