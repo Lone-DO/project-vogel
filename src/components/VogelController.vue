@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import ToggleSwitch from './ToggleSwitch.vue';
+import { usePlayerStore } from '@/stores/player';
 
-const active = ref(true)
+const playerStore = usePlayerStore()
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const active = ref(true)
       </p>
 
     </div>
-    <ToggleSwitch v-model='active' />
+    <ToggleSwitch v-model='playerStore.enabled' />
   </div>
 </template>
 
