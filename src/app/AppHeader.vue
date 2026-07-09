@@ -26,9 +26,12 @@
     color: inherit;
     text-decoration: none;
   }
+
   img {
+    min-width: 2rem;
     width: 2rem;
   }
+
   &__house-icon {
     margin-right: 1rem;
   }
@@ -36,6 +39,7 @@
   &__title {
     font-weight: 800;
   }
+
   &__subtitle {
     font-weight: 400;
   }
