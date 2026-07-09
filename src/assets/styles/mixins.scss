@@ -18,7 +18,7 @@
 }
 
 @mixin MaxWidth($width: unset) {
-  width: fit-content;
+  width: auto;
   @if ($width != 'unset') {
     max-width: $width;
   }

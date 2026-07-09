@@ -66,6 +66,7 @@ watch(vogelId, (id) => playerStore.setSound(id, true))
   }
 
   &:deep() #vogel-player img {
+    min-width: calc($iconSize * 1.5);
     width: calc($iconSize * 1.5);
     height: calc($iconSize * 1.5);
   }
@@ -98,6 +99,7 @@ nav {
   }
 
   &:deep img {
+    min-width: $iconSize;
     width: $iconSize;
     height: $iconSize;
     border-radius: 100%;

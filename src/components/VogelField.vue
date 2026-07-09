@@ -70,8 +70,6 @@ watch(() => $props.vogel, init)
   position: var(--icon-position-nested);
 
   @include Laptop {
-    flex-direction: column;
-
     img[data-type="icon"] {
       margin-right: $gap;
     }
