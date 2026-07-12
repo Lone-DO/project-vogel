@@ -28,6 +28,7 @@
     "lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"typecheck": "vue-tsc -b",
+    "type-check": "vue-tsc --build",
     "format": "prettier --write src/"
   },
   "dependencies": {
